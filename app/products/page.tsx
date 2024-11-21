@@ -1,4 +1,4 @@
-import { ReactElement } from "react"
+import type { ReactElement } from "react"
 import { BoxIcon, Hash, Search, TagIcon } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
