@@ -3,7 +3,7 @@
 import "server-only"
 import { cache } from "react"
 import { revalidatePath } from "next/cache"
-import { data, type CategoriesType } from "@/constants/categories"
+import { Deal, data, type CategoriesType } from "@/constants/categories"
 
 // import { createClient } from "@/db/supabase/server"
 
@@ -37,8 +37,58 @@ export async function getFilters() {
     tags: tagsData.map((item) => item.tags).filter(Boolean),
   }
 }
-export const getProducts = async (id?: string): Promise<CategoriesType[]> => {
-  return data
+export const getProducts = async (
+  search?: string,
+  category?: string,
+  label?: string,
+  tag?: string
+): Promise<CategoriesType[]> => {
+  // Normalize search term for case-insensitive comparison
+  const normalizedSearch = search?.toLowerCase()
+
+  // Filter each category's deals based on the provided criteria
+  const filteredCategories: CategoriesType[] = data
+    .map((categoryItem) => {
+      // Filter deals within the current category
+      const filteredDeals: Deal[] = categoryItem.deals.filter((deal) => {
+        let isMatch = true
+
+        // Apply search filter
+        if (normalizedSearch) {
+          const nameMatch = deal.name.toLowerCase().includes(normalizedSearch)
+          const descriptionMatch = deal.description
+            .toLowerCase()
+            .includes(normalizedSearch)
+          isMatch = isMatch && (nameMatch || descriptionMatch)
+        }
+
+        // Apply category filter
+        if (category) {
+          isMatch = isMatch && deal.category === category
+        }
+
+        // Apply label filter
+        if (label) {
+          isMatch = isMatch && deal.labels.includes(label)
+        }
+
+        // Apply tag filter
+        if (tag) {
+          isMatch = isMatch && deal.tags.includes(tag)
+        }
+
+        return isMatch
+      })
+
+      return {
+        ...categoryItem,
+        deals: filteredDeals,
+      }
+    })
+    // Exclude categories that have no matching deals
+    .filter((categoryItem) => categoryItem.deals.length > 0)
+
+  return filteredCategories
 }
 
 export const getProductById = async (
