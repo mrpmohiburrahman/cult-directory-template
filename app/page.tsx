@@ -52,7 +52,7 @@ async function Page({ searchParams }: { searchParams: { search?: string } }) {
                 {filteredFeaturedData.length >= 1 ? (
                   <Suspense fallback={<div>Loading...</div>}>
                     <div className=" relative">
-                      {/* <FeaturedGrid featuredData={filteredFeaturedData} /> */}
+                      <FeaturedGrid featuredData={filteredFeaturedData} />
                     </div>
                   </Suspense>
                 ) : (

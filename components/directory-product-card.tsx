@@ -96,9 +96,9 @@ export const ResourceCard: React.FC<{
               "w-full"
             )}
           >
-            {/* {data.logo_src ? (
+            {data.logo_src ? (
               <MinimalCardImage alt={data.codename} src={data.logo_src} />
-            ) : null} */}
+            ) : null}
 
             <MinimalCardTitle
               className={cn(
