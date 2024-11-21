@@ -62,34 +62,21 @@ export function NavSidebar({
     <>
       <aside
         className={cn(
-          pathname.includes("admin")
-            ? "w-16 border-r border-black/10 dark:border-white/10"
-            : "w-42",
+          "w-42",
           "fixed inset-y-0 left-0 z-10 hidden sm:flex flex-col bg-[#FAFAFA] dark:bg-background"
         )}
       >
         <nav className="flex flex-col items-center gap-4 px-2 py-5">
-          {pathname.includes("admin") ? (
-            <>
-              <LogoAnimationLink />
-              <AdminNav pathname={pathname} />
-            </>
-          ) : (
-            <ProductNav
-              categories={categories}
-              tags={tags}
-              labels={labels}
-              searchParams={searchParams}
-            />
-          )}
+          <ProductNav
+            categories={categories}
+            tags={tags}
+            labels={labels}
+            searchParams={searchParams}
+          />
         </nav>
 
         <div
-          className={
-            pathname.includes("admin")
-              ? "flex flex-col gap-4 items-center py-5 mt-auto px-2 mx-2"
-              : "pl-3 flex flex-col justify-center gap-4 items-start pb-8"
-          }
+          className={"pl-3 flex flex-col justify-center gap-4 items-start pb-8"}
         >
           <ModeToggle />
         </div>
@@ -117,53 +104,44 @@ export function NavSidebar({
               className="sm:max-w-[15rem] py-4 pl-1 border-r border-primary/10"
             >
               <nav className="flex flex-col items-start gap-4 px-2 py-5">
-                {pathname.includes("admin") ? (
-                  <>
-                    <LogoAnimationLink />
-                    <AdminNav pathname={pathname} />
-                  </>
-                ) : (
-                  <>
-                    <ProductNav
-                      tags={tags}
-                      labels={labels}
-                      categories={categories}
-                      handleLinkClick={handleLinkClick}
-                      searchParams={searchParams}
+                <ProductNav
+                  tags={tags}
+                  labels={labels}
+                  categories={categories}
+                  handleLinkClick={handleLinkClick}
+                  searchParams={searchParams}
+                >
+                  <div className="my-4 space-y-3">
+                    <Link
+                      href="/"
+                      className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                      prefetch={false}
+                      onClick={handleLinkClick}
                     >
-                      <div className="my-4 space-y-3">
-                        <Link
-                          href="/"
-                          className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                          prefetch={false}
-                          onClick={handleLinkClick}
-                        >
-                          <HomeIcon className="h-5 w-5" />
-                          Home
-                        </Link>
-                        <Link
-                          href="/submit"
-                          className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                          prefetch={false}
-                          onClick={handleLinkClick}
-                        >
-                          <PlusIcon className="h-5 w-5" />
-                          Submit
-                        </Link>
+                      <HomeIcon className="h-5 w-5" />
+                      Home
+                    </Link>
+                    <Link
+                      href="/submit"
+                      className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                      prefetch={false}
+                      onClick={handleLinkClick}
+                    >
+                      <PlusIcon className="h-5 w-5" />
+                      Submit
+                    </Link>
 
-                        <Link
-                          href="/login"
-                          className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                          prefetch={false}
-                          onClick={handleLinkClick}
-                        >
-                          <LogIn className="h-5 w-5" />
-                          Login
-                        </Link>
-                      </div>
-                    </ProductNav>
-                  </>
-                )}
+                    <Link
+                      href="/login"
+                      className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                      prefetch={false}
+                      onClick={handleLinkClick}
+                    >
+                      <LogIn className="h-5 w-5" />
+                      Login
+                    </Link>
+                  </div>
+                </ProductNav>
               </nav>
               <div className="flex flex-col items-start pl-4">
                 <nav className="mb-6   flex gap-4 ">
@@ -294,87 +272,6 @@ function ProductNav({
         </ul>
       </ScrollArea>
     </div>
-  )
-}
-
-function AdminNav({ pathname }: { pathname: string }) {
-  return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Link
-            href="/admin"
-            className={cn(
-              "flex gap-2 md:gap-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
-              {
-                "bg-accent text-accent-foreground": pathname === "/admin",
-              }
-            )}
-            prefetch={false}
-          >
-            <BarChartIcon className="h-5 w-5" />
-            <span className="md:sr-only">Overview</span>
-          </Link>
-        </TooltipTrigger>
-        <TooltipContent side="right">Dashboard</TooltipContent>
-      </Tooltip>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Link
-            href="/admin/products"
-            className={cn(
-              "flex gap-2 md:gap-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
-              {
-                "bg-accent text-accent-foreground":
-                  pathname === "/admin/products",
-              }
-            )}
-            prefetch={false}
-          >
-            <FolderOpenIcon className="h-5 w-5" />
-            <span className="md:sr-only">Products</span>
-          </Link>
-        </TooltipTrigger>
-        <TooltipContent side="right">Products</TooltipContent>
-      </Tooltip>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Link
-            href="/admin/users"
-            className={cn(
-              "flex gap-2 md:gap-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
-              {
-                "bg-accent text-accent-foreground": pathname === "/admin/users",
-              }
-            )}
-            prefetch={false}
-          >
-            <UsersIcon className="h-5 w-5" />
-            <span className="md:sr-only">Users</span>
-          </Link>
-        </TooltipTrigger>
-        <TooltipContent side="right">Users</TooltipContent>
-      </Tooltip>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Link
-            href="/admin/filters"
-            className={cn(
-              "flex gap-2 md:gap-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8",
-              {
-                "bg-accent text-accent-foreground":
-                  pathname === "/admin/filters",
-              }
-            )}
-            prefetch={false}
-          >
-            <FilterIcon className="h-5 w-5" />
-            <span className="md:sr-only">Filters</span>
-          </Link>
-        </TooltipTrigger>
-        <TooltipContent side="right">Filters</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
   )
 }
 
