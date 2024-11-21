@@ -22,8 +22,8 @@ const FEATURED_IDS = [
 ] // Replace 'id1', 'id2', 'id3' with actual IDs you want to feature
 
 async function Page({ searchParams }: { searchParams: { search?: string } }) {
-  let data = await getProducts(searchParams.search)
-  let filters = await getCachedFilters()
+  const data = await getProducts(searchParams.search)
+  const filters = await getCachedFilters()
   // const filteredFeaturedData = data.filter((d: any) =>
   //   FEATURED_IDS.includes(d.id)
   // )
