@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { FadeIn } from "@/components/cult/fade-in"
 import { GradientHeading } from "@/components/cult/gradient-heading"
-import { ResourceCardGrid } from "@/components/directory-card-grid"
+import { ResourceCardGrid } from "@/components/featured-grid"
 
 import { NavSidebar } from "../../components/nav"
 import { getCachedFilters } from "../actions/cached_actions"

@@ -3,13 +3,11 @@ import { Suspense } from "react"
 import { Separator } from "@/components/ui/separator"
 import { FadeIn } from "@/components/cult/fade-in"
 import { DirectorySearch } from "@/components/directory-search"
+import { EmptyFeaturedGrid } from "@/components/empty-featured-grid"
 import { Hero } from "@/components/hero"
+import { ResourceCardGrid } from "@/components/resource-card-grid"
 
-import {
-  EmptyFeaturedGrid,
-  FeaturedGrid,
-  ResourceCardGrid,
-} from "../components/directory-card-grid"
+import { FeaturedGrid } from "../components/featured-grid"
 import { NavSidebar } from "../components/nav"
 import { getCachedFilters } from "./actions/cached_actions"
 import { getProducts } from "./actions/product"
@@ -54,7 +52,7 @@ async function Page({ searchParams }: { searchParams: { search?: string } }) {
                 {filteredFeaturedData.length >= 1 ? (
                   <Suspense fallback={<div>Loading...</div>}>
                     <div className=" relative">
-                      <FeaturedGrid featuredData={filteredFeaturedData} />
+                      {/* <FeaturedGrid featuredData={filteredFeaturedData} /> */}
                     </div>
                   </Suspense>
                 ) : (
