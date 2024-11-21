@@ -107,19 +107,29 @@ const TailwindMasonryGrid: React.FC<TailwindMasonryGridProps> = ({
   filteredData,
 }) => {
   return (
-    <div className="flex justify-center w-full">
-      <div className="gap-4 w-full ">
-        <div className="columns-1 lg:columns-2 xl:columns-3 2xl:columns-4 3xl:columns-4 space-y-3 w-full  ">
-          {filteredData &&
-            filteredData.map((data, index) => (
-              <div key={`${index}-${data.id}`} className="">
-                <ResourceCard data={data} order={index} />
-              </div>
-            ))}
+    <div className=" space-y-3 w-full  ">
+      {filteredData?.map((data, index) => (
+        <div key={`${index}-${data.id}`} className="">
+          <ResourceCard data={data} order={index} />
         </div>
-      </div>
+      ))}
     </div>
   )
+
+  // return (
+  //   <div className="flex justify-center w-full">
+  //     <div className="gap-4 w-full ">
+  //       <div className="columns-1 lg:columns-2 xl:columns-3 2xl:columns-4 3xl:columns-4 space-y-3 w-full  ">
+  //         {filteredData &&
+  //           filteredData.map((data, index) => (
+  //             <div key={`${index}-${data.id}`} className="">
+  //               <ResourceCard data={data} order={index} />
+  //             </div>
+  //           ))}
+  //       </div>
+  //     </div>
+  //   </div>
+  // )
 }
 
 export const FeaturedGrid: React.FC<{ featuredData: Product[] }> = ({
