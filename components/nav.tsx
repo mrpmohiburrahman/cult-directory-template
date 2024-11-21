@@ -1,43 +1,22 @@
 "use client"
 
-import { ReactNode, useState } from "react"
+import { useState, type ReactNode } from "react"
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { createClient } from "@/db/supabase/client"
 import {
-  BarChartIcon,
   BoxIcon,
-  FilterIcon,
-  FolderOpenIcon,
   Hash,
   HomeIcon,
   LogIn,
-  LogOutIcon,
   PanelLeftIcon,
   PlusIcon,
   TagIcon,
-  UsersIcon,
 } from "lucide-react"
 
 import { cn, truncateString } from "@/lib/utils"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 import { ModeToggle } from "@/app/providers"
 
 export function NavSidebar({
