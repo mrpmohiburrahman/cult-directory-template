@@ -1,6 +1,7 @@
 "use client"
 
-import React, { Suspense } from "react"
+import type React from "react"
+import { Suspense } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -77,11 +78,6 @@ export const ResourceCardGrid: React.FC<SEOCardGridProps> = ({
       </div>
 
       <div
-        // className={cn(
-        //   "bg-white dark:bg-[#1E1E1E] rounded-[2rem] p-4 w-full",
-        //   "shadow-[0_0_0_1px_rgba(0,0,0,0.1)_inset,0_0.5px_0.5px_rgba(0,0,0,0.05)_inset,0_-0.5px_0.5px_rgba(0,0,0,0.05)_inset,0_1px_2px_rgba(0,0,0,0.1)]",
-        //   "dark:shadow-[0_0_0_0.5px_rgba(255,255,255,0.06)_inset,0_0.5px_0.5px_rgba(255,255,255,0.1)_inset,0_-0.5px_0.5px_rgba(255,255,255,0.1)_inset,0_0.5px_1px_rgba(0,0,0,0.3),0_1px_2px_rgba(0,0,0,0.4)]"
-        // )}
         className={cn(
           " p-4 w-full",
           pathname.includes("/products")
@@ -91,7 +87,7 @@ export const ResourceCardGrid: React.FC<SEOCardGridProps> = ({
       >
         <Suspense fallback={<div>Loading...</div>}>
           <div className="relative">
-            <TailwindMasonryGrid filteredData={sortedData} />
+            <TailwindGrid filteredData={sortedData} />
           </div>
         </Suspense>
       </div>
@@ -99,13 +95,11 @@ export const ResourceCardGrid: React.FC<SEOCardGridProps> = ({
   )
 }
 
-interface TailwindMasonryGridProps {
+interface TailwindGridProps {
   filteredData: Product[]
 }
 
-const TailwindMasonryGrid: React.FC<TailwindMasonryGridProps> = ({
-  filteredData,
-}) => {
+const TailwindGrid: React.FC<TailwindGridProps> = ({ filteredData }) => {
   return (
     <div className=" space-y-3 w-full  ">
       {filteredData?.map((data, index) => (
@@ -115,21 +109,6 @@ const TailwindMasonryGrid: React.FC<TailwindMasonryGridProps> = ({
       ))}
     </div>
   )
-
-  // return (
-  //   <div className="flex justify-center w-full">
-  //     <div className="gap-4 w-full ">
-  //       <div className="columns-1 lg:columns-2 xl:columns-3 2xl:columns-4 3xl:columns-4 space-y-3 w-full  ">
-  //         {filteredData &&
-  //           filteredData.map((data, index) => (
-  //             <div key={`${index}-${data.id}`} className="">
-  //               <ResourceCard data={data} order={index} />
-  //             </div>
-  //           ))}
-  //       </div>
-  //     </div>
-  //   </div>
-  // )
 }
 
 export const FeaturedGrid: React.FC<{ featuredData: Product[] }> = ({
