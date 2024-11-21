@@ -61,7 +61,7 @@ export const SingleDeal: React.FC<{
       layout
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="group relative  break-inside-avoid w-full"
+      className="group relative break-inside-avoid w-full mb-2"
     >
       <Link
         href={`/products/${deal.id}`}
@@ -75,53 +75,53 @@ export const SingleDeal: React.FC<{
               optimisticResource.view_count > 350
                 ? " text-neutral-900 hover:bg-[#666BFA] "
                 : "",
-              "w-full"
+              "w-full flex flex-row p-4 space-x-4"
             )}
           >
+            {/* Image Section */}
             {deal.imageSrc ? (
-              <MinimalCardImage alt={deal.name} src={deal.imageSrc} />
+              <MinimalCardImage
+                alt={deal.name}
+                src={deal.imageSrc}
+                className="w-24 h-24 object-cover rounded-md flex-shrink-0"
+              />
             ) : null}
 
-            <MinimalCardTitle
-              className={cn(
-                " font-semibold mb-0.5",
-                optimisticResource?.view_count > 100 ? " text-neutral-800" : ""
-              )}
-            >
-              {deal.name}
-            </MinimalCardTitle>
-            <motion.p
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-xs leading-3 mb-2 text-neutral-500"
-            >
-              {getLastPathSegment(deal.link, 10)}
-            </motion.p>
-            <MinimalCardDescription
-              className={cn(
-                "text-sm",
-                optimisticResource?.view_count > 100 ? " text-neutral-700" : ""
-              )}
-            >
-              {trim ? `${deal.description.slice(0, 82)}...` : deal.description}
-            </MinimalCardDescription>
-
-            <MinimalCardContent />
-
-            <MinimalCardFooter>
-              <div
-                className={cn(
-                  "p-1 py-1.5 px-1.5 rounded-md text-neutral-500 flex items-center gap-1  absolute bottom-2 right-2 rounded-br-[16px]",
-                  optimisticResource?.view_count > 100
-                    ? " text-neutral-800"
-                    : ""
-                )}
-              >
-                {/* <p className="flex items-center gap-1 tracking-tight text-neutral pr-1 text-xs">
-                  {optimisticResource?.view_count || deal.view_count}
-                </p> */}
+            <div className="flex flex-col justify-between flex-grow">
+              <div>
+                {/* Name */}
+                <MinimalCardTitle
+                  className={cn(
+                    "font-semibold mb-1",
+                    optimisticResource?.view_count > 100
+                      ? "text-neutral-800"
+                      : ""
+                  )}
+                >
+                  {deal.name}
+                </MinimalCardTitle>
+                {/* description */}
+                <MinimalCardDescription
+                  className={cn(
+                    "text-sm",
+                    optimisticResource?.view_count > 100
+                      ? "text-neutral-700"
+                      : ""
+                  )}
+                >
+                  {trim
+                    ? `${deal.description.slice(0, 82)}...`
+                    : deal.description}
+                </MinimalCardDescription>
               </div>
-            </MinimalCardFooter>
+
+              {/* Discount and Footer */}
+              <div className="flex justify-between items-center mt-2">
+                <span className="text-sm font-medium text-green-600">
+                  {deal.discount}
+                </span>
+              </div>
+            </div>
           </MinimalCard>
         </div>
       </Link>
