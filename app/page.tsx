@@ -42,11 +42,11 @@ async function Page({ searchParams }: { searchParams: { search?: string } }) {
                 </Hero>
               </div>
 
-              <div className="col-span-1 md:col-span-4 mt-6 md:mt-0">
+              {/* <div className="col-span-1 md:col-span-4 mt-6 md:mt-0">
                 <div className="relative">
                   <EmptyFeaturedGrid />
                 </div>
-              </div>
+              </div> */}
             </div>
           </ResourceCardGrid>
         </FadeIn>
