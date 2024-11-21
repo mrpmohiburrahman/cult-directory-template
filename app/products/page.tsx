@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { FadeIn } from "@/components/cult/fade-in"
 import { GradientHeading } from "@/components/cult/gradient-heading"
-import { ResourceCardGrid } from "@/components/featured-grid"
+import { ResourceCardGrid } from "@/components/resource-card-grid"
 
 import { NavSidebar } from "../../components/nav"
 import { getCachedFilters } from "../actions/cached_actions"
@@ -25,7 +25,7 @@ export default async function ProductsPage({
 }): Promise<ReactElement> {
   const { search, category, label, tag } = searchParams
   const data = await getProducts(search, category, label, tag)
-  let filters = await getCachedFilters()
+  const filters = await getCachedFilters()
 
   return (
     <>
@@ -37,7 +37,7 @@ export default async function ProductsPage({
 
       <div className=" max-w-full pt-4">
         <FadeIn>
-          <ResourceCardGrid sortedData={data} filteredFeaturedData={null}>
+          <ResourceCardGrid sortedData={data}>
             {search ?? category ?? label ?? tag ? (
               <div className="md:mr-auto mx-auto flex flex-col items-center md:items-start">
                 <div className="flex mb-1 justify-center md:justify-start">
