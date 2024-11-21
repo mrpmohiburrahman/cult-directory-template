@@ -18,21 +18,21 @@ const useResourceCounter = () => {
     }
   }, [])
 
-  const incrementClickCount = useCallback(async (id: string) => {
-    const { data, error } = await supabase.rpc("increment_click_count", {
-      resource_id: id,
-    })
+  // const incrementClickCount = useCallback(async (id: string) => {
+  //   const { data, error } = await supabase.rpc("increment_click_count", {
+  //     resource_id: id,
+  //   })
 
-    if (error) {
-      console.error("Error incrementing click count:", error)
-    } else {
-      console.log("Click count incremented:", data)
-    }
-  }, [])
+  //   if (error) {
+  //     console.error("Error incrementing click count:", error)
+  //   } else {
+  //     console.log("Click count incremented:", data)
+  //   }
+  // }, [])
 
   return {
     incrementViewCount,
-    incrementClickCount,
+    // incrementClickCount,
   }
 }
 

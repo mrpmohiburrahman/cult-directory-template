@@ -1,9 +1,10 @@
 "use server"
 
+// Import statements (you can remove unused imports if necessary)
 import "server-only"
 import { unstable_cache } from "next/cache"
-import { createClient } from "@supabase/supabase-js"
 
+// Define your data types
 type FilterData = {
   categories: string[]
   labels: string[]
@@ -22,52 +23,45 @@ type TagData = {
   name: string
 }
 
-const client = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+// Mock data
+const mockCategories: CategoryData[] = [
+  { name: "Electronics" },
+  { name: "Books" },
+  { name: "Clothing" },
+]
+
+const mockLabels: LabelData[] = [
+  { name: "New Arrival" },
+  { name: "Sale" },
+  { name: "Popular" },
+]
+
+const mockTags: TagData[] = [
+  { name: "Smartphone" },
+  { name: "Laptop" },
+  { name: "T-Shirt" },
+]
+
+// Mock implementation of getFilters
 async function getFilters(): Promise<FilterData> {
-  const { data: categoriesData, error: categoriesError } = await client
-    .from("categories")
-    .select("name")
+  // Simulate asynchronous operation with a delay (optional)
+  await new Promise((resolve) => setTimeout(resolve, 100)) // 100ms delay
 
-  const { data: labelsData, error: labelsError } = await client
-    .from("labels")
-    .select("name")
-
-  const { data: tagsData, error: tagsError } = await client
-    .from("tags")
-    .select("name")
-
-  if (categoriesError || labelsError || tagsError) {
-    console.error(
-      "Error fetching filters:",
-      categoriesError,
-      labelsError,
-      tagsError
-    )
-    return { categories: [], labels: [], tags: [] }
-  }
-
+  // Function to extract unique names
   const unique = (array: string[]) => [...new Set(array)]
 
-  const categories = categoriesData
-    ? unique(
-        categoriesData.map((item: CategoryData) => item.name).filter(Boolean)
-      )
-    : []
+  const categories = unique(
+    mockCategories.map((item) => item.name).filter(Boolean)
+  )
 
-  const labels = labelsData
-    ? unique(labelsData.map((item: LabelData) => item.name).filter(Boolean))
-    : []
+  const labels = unique(mockLabels.map((item) => item.name).filter(Boolean))
 
-  const tags = tagsData
-    ? unique(tagsData.map((item: TagData) => item.name).filter(Boolean))
-    : []
+  const tags = unique(mockTags.map((item) => item.name).filter(Boolean))
 
   return { categories, labels, tags }
 }
 
+// Mock implementation of getCachedFilters using unstable_cache
 export const getCachedFilters = unstable_cache(
   async (): Promise<FilterData> => {
     const { categories, labels, tags } = await getFilters()
@@ -76,3 +70,14 @@ export const getCachedFilters = unstable_cache(
   ["product-filters"],
   { tags: [`product_filters`], revalidate: 9000 }
 )
+
+// Example usage (for testing purposes)
+async function displayFilters() {
+  const filters = await getCachedFilters()
+  console.log("Categories:", filters.categories)
+  console.log("Labels:", filters.labels)
+  console.log("Tags:", filters.tags)
+}
+
+// Call the example usage function
+displayFilters()

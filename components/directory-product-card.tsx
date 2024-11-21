@@ -96,9 +96,9 @@ export const ResourceCard: React.FC<{
               "w-full"
             )}
           >
-            {data.logo_src ? (
+            {/* {data.logo_src ? (
               <MinimalCardImage alt={data.codename} src={data.logo_src} />
-            ) : null}
+            ) : null} */}
 
             <MinimalCardTitle
               className={cn(
@@ -106,7 +106,8 @@ export const ResourceCard: React.FC<{
                 optimisticResource.view_count > 100 ? " text-neutral-800" : ""
               )}
             >
-              {data.codename.substring(0, 30)}
+              MinimalCardTitle
+              {/* {data.codename.substring(0, 30)} */}
             </MinimalCardTitle>
             <motion.p
               initial={{ opacity: 0, y: 5 }}

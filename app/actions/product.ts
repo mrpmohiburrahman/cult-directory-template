@@ -3,31 +3,32 @@
 import "server-only"
 import { cache } from "react"
 import { revalidatePath } from "next/cache"
-import { createClient } from "@/db/supabase/server"
+
+// import { createClient } from "@/db/supabase/server"
 
 export async function getFilters() {
-  const db = createClient()
-  const { data: categoriesData, error: categoriesError } = await db
-    .from("products")
-    .select("categories")
+  // const db = createClient()
+  // const { data: categoriesData, error: categoriesError } = await db
+  //   .from("products")
+  //   .select("categories")
 
-  const { data: labelsData, error: labelsError } = await db
-    .from("products")
-    .select("labels")
+  // const { data: labelsData, error: labelsError } = await db
+  //   .from("products")
+  //   .select("labels")
 
-  const { data: tagsData, error: tagsError } = await db
-    .from("products")
-    .select("tags")
+  // const { data: tagsData, error: tagsError } = await db
+  //   .from("products")
+  //   .select("tags")
 
-  if (categoriesError || labelsError || tagsError) {
-    console.error(
-      "Error fetching filters:",
-      categoriesError,
-      labelsError,
-      tagsError
-    )
-    return { categories: [], labels: [], tags: [] }
-  }
+  // if (categoriesError || labelsError || tagsError) {
+  //   console.error(
+  //     "Error fetching filters:",
+  //     categoriesError,
+  //     labelsError,
+  //     tagsError
+  //   )
+  //   return { categories: [], labels: [], tags: [] }
+  // }
 
   return {
     categories: categoriesData.map((item) => item.categories).filter(Boolean),
@@ -43,35 +44,35 @@ export const getProducts = cache(
     label?: string,
     tag?: string
   ) => {
-    const db = createClient()
-    let query = db.from("products").select("*")
+    // const db = createClient()
+    // let query = db.from("products").select("*")
 
-    if (searchTerm) {
-      query = query.or(
-        `codename.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%,punchline.ilike.%${searchTerm}%`
-      )
-    }
+    // if (searchTerm) {
+    //   query = query.or(
+    //     `codename.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%,punchline.ilike.%${searchTerm}%`
+    //   )
+    // }
 
-    if (category) {
-      query = query.eq("categories", category)
-    }
+    // if (category) {
+    //   query = query.eq("categories", category)
+    // }
 
-    if (label) {
-      query = query.contains("labels", [label])
-    }
+    // if (label) {
+    //   query = query.contains("labels", [label])
+    // }
 
-    if (tag) {
-      query = query.contains("tags", [tag])
-    }
+    // if (tag) {
+    //   query = query.contains("tags", [tag])
+    // }
 
-    const { data, error } = await query
+    // const { data, error } = await query
 
-    if (error) {
-      console.error("Error searching resources:", error)
-      return []
-    }
+    // if (error) {
+    //   console.error("Error searching resources:", error)
+    //   return []
+    // }
 
-    return data
+    return [{}]
   }
 )
 
@@ -92,17 +93,15 @@ export async function getProductById(id?: string) {
 }
 
 export async function incrementClickCount(id: string) {
-  const supabase = createClient()
-
-  const { data, error } = await supabase.rpc("increment_product_view_count", {
-    product_id: id,
-  })
-
-  if (error) {
-    console.error("Error incrementing click count:", error)
-  } else {
-    console.log("Click count incremented:", data)
-  }
-
-  revalidatePath("/products")
+  console.log("🚀 ~ incrementClickCount ~ incrementClickCount: incremented", id)
+  // const supabase = createClient()
+  // const { data, error } = await supabase.rpc("increment_product_view_count", {
+  //   product_id: id,
+  // })
+  // if (error) {
+  //   console.error("Error incrementing click count:", error)
+  // } else {
+  //   console.log("Click count incremented:", data)
+  // }
+  // revalidatePath("/products")
 }
