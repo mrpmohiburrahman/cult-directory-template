@@ -10,7 +10,6 @@ import { TailwindGrid } from "./tailwind-grid"
 
 export interface SEOCardGridProps {
   sortedData: Product[]
-  filteredFeaturedData: Product[] | null
   children?: React.ReactNode
 }
 export const ResourceCardGrid: React.FC<SEOCardGridProps> = ({

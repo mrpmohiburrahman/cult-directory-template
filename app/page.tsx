@@ -23,9 +23,9 @@ const FEATURED_IDS = [
 async function Page({ searchParams }: { searchParams: { search?: string } }) {
   let data = await getProducts(searchParams.search)
   let filters = await getCachedFilters()
-  const filteredFeaturedData = data.filter((d: any) =>
-    FEATURED_IDS.includes(d.id)
-  )
+  // const filteredFeaturedData = data.filter((d: any) =>
+  //   FEATURED_IDS.includes(d.id)
+  // )
 
   return (
     <>
@@ -37,10 +37,7 @@ async function Page({ searchParams }: { searchParams: { search?: string } }) {
 
       <div className="max-w-full px-2 md:pl-4 md:pr-0 pt-2">
         <FadeIn>
-          <ResourceCardGrid
-            sortedData={data}
-            filteredFeaturedData={filteredFeaturedData}
-          >
+          <ResourceCardGrid sortedData={data}>
             <div className="grid grid-cols-1  xl:grid-cols-6 lg:gap-16 pb-8 pt-8 relative">
               <div className="col-span-1 md:col-span-2 z-10">
                 <Hero>
@@ -49,17 +46,9 @@ async function Page({ searchParams }: { searchParams: { search?: string } }) {
               </div>
 
               <div className="col-span-1 md:col-span-4 mt-6 md:mt-0">
-                {filteredFeaturedData.length >= 1 ? (
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <div className=" relative">
-                      <FeaturedGrid featuredData={filteredFeaturedData} />
-                    </div>
-                  </Suspense>
-                ) : (
-                  <div className="relative">
-                    <EmptyFeaturedGrid />
-                  </div>
-                )}
+                <div className="relative">
+                  <EmptyFeaturedGrid />
+                </div>
               </div>
             </div>
           </ResourceCardGrid>
