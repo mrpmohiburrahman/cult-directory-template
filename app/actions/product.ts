@@ -3,6 +3,7 @@
 import "server-only"
 import { cache } from "react"
 import { revalidatePath } from "next/cache"
+import { data, type CategoriesType } from "@/constants/categories"
 
 // import { createClient } from "@/db/supabase/server"
 
@@ -36,72 +37,18 @@ export async function getFilters() {
     tags: tagsData.map((item) => item.tags).filter(Boolean),
   }
 }
+export const getProducts = async (id?: string): Promise<CategoriesType[]> => {
+  return data
+}
 
-export const getProducts = cache(
-  async (
-    searchTerm?: string,
-    category?: string,
-    label?: string,
-    tag?: string
-  ) => {
-    // const db = createClient()
-    // let query = db.from("products").select("*")
-
-    // if (searchTerm) {
-    //   query = query.or(
-    //     `codename.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%,punchline.ilike.%${searchTerm}%`
-    //   )
-    // }
-
-    // if (category) {
-    //   query = query.eq("categories", category)
-    // }
-
-    // if (label) {
-    //   query = query.contains("labels", [label])
-    // }
-
-    // if (tag) {
-    //   query = query.contains("tags", [tag])
-    // }
-
-    // const { data, error } = await query
-
-    // if (error) {
-    //   console.error("Error searching resources:", error)
-    //   return []
-    // }
-
-    return [{}]
-  }
-)
-
-export async function getProductById(id?: string) {
-  const supabase = createClient()
-
-  const { data, error } = await supabase
-    .from("products")
-    .select("*")
-    .eq("id", id)
-  if (error) {
-    console.error("Error fetching resources:", error)
-    return []
-  }
-
+export const getProductById = async (
+  id?: string
+): Promise<CategoriesType[]> => {
   console.log(data)
   return data
 }
 
 export async function incrementClickCount(id: string) {
   console.log("🚀 ~ incrementClickCount ~ incrementClickCount: incremented", id)
-  // const supabase = createClient()
-  // const { data, error } = await supabase.rpc("increment_product_view_count", {
-  //   product_id: id,
-  // })
-  // if (error) {
-  //   console.error("Error incrementing click count:", error)
-  // } else {
-  //   console.log("Click count incremented:", data)
-  // }
   // revalidatePath("/products")
 }

@@ -1,9 +1,9 @@
-import type { Product } from "@/constants/categories"
+import type { CategoriesType, Product } from "@/constants/categories"
 
 import { ResourceCard } from "./directory-product-card"
 
 interface TailwindGridProps {
-  filteredData: Product[]
+  filteredData: CategoriesType[]
 }
 
 export const TailwindGrid: React.FC<TailwindGridProps> = ({ filteredData }) => {
@@ -11,7 +11,8 @@ export const TailwindGrid: React.FC<TailwindGridProps> = ({ filteredData }) => {
     <div className=" space-y-3 w-full  ">
       {filteredData?.map((data, index) => (
         <div key={`${index}-${data.id}`} className="">
-          <ResourceCard data={data} order={index} />
+          <span>{data.name}</span>
+          <ResourceCard OneCategory={data} order={index} />
         </div>
       ))}
     </div>

@@ -2,14 +2,14 @@
 
 import { Suspense } from "react"
 import { usePathname } from "next/navigation"
-import type { Product } from "@/constants/categories"
+import type { CategoriesType, Product } from "@/constants/categories"
 
 import { cn } from "@/lib/utils"
 
 import { TailwindGrid } from "./tailwind-grid"
 
 export interface SEOCardGridProps {
-  sortedData: Product[]
+  sortedData: CategoriesType[]
   children?: React.ReactNode
 }
 export const ResourceCardGrid: React.FC<SEOCardGridProps> = ({
