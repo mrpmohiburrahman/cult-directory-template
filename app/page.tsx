@@ -1,6 +1,5 @@
 import { Suspense } from "react"
 
-import { getCachedFilters } from "@/lib/getCachedFilters"
 import { Separator } from "@/components/ui/separator"
 import { FadeIn } from "@/components/cult/fade-in"
 import { DirectorySearch } from "@/components/directory-search"
@@ -10,6 +9,7 @@ import { ResourceCardGrid } from "@/components/resource-card-grid"
 
 import { FeaturedGrid } from "../components/featured-grid"
 import { NavSidebar } from "../components/nav"
+import { getCachedFilters } from "./actions/cached_actions"
 // import { getCachedFilters } from "./actions/cached_actions"
 import { getProducts } from "./actions/product"
 
