@@ -29,11 +29,7 @@ export default async function ProductsPage({
 
   return (
     <>
-      <NavSidebar
-        categories={filters.categories}
-        labels={filters.labels}
-        tags={filters.tags}
-      />
+      <NavSidebar categories={filters.categories} />
 
       <div className=" max-w-full pt-4">
         <FadeIn>

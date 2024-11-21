@@ -30,11 +30,7 @@ async function Page({ searchParams }: { searchParams: { search?: string } }) {
 
   return (
     <>
-      <NavSidebar
-        categories={filters.categories}
-        labels={filters.labels}
-        tags={filters.tags}
-      />
+      <NavSidebar categories={filters.categories} />
 
       <div className="max-w-full px-2 md:pl-4 md:pr-0 pt-2">
         <FadeIn>
